@@ -62,9 +62,8 @@ def addDayFilter(day):
 
 def getAllBookings():
     data = []
-    for rink in ALL_RINKS:
-        print(rink)
-        data += getResultsByComplex(rink.complexId)
+    for rink in getRinkInfo():
+        data += getResultsByComplex(rink.id)
     return data
 
 def getRinkInfo():
@@ -82,7 +81,7 @@ def getResultsByComplex(complexId: int) -> list:
     resultEnd = False
     data = []
     displayStart=0
-    while displayStart < 20 and not resultEnd:
+    while not resultEnd:
         URL = BASE_URL + DETAILS_URL + AID_PARAM + COMPLEX_PARAM + str(complexId) + DISPLAY_PARAM + str(displayStart)
         page = session.get(URL)
         soup = BeautifulSoup(page.content, 'html.parser')
@@ -107,7 +106,6 @@ def getResultsByComplex(complexId: int) -> list:
                 data += [RinkBooking(facility, day, date, startTime, endTime, classes, available)]
             else:
                 resultEnd = True
-                #print("Reached end of results")
         displayStart += 10
     return data
 
