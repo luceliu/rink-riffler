@@ -76,7 +76,6 @@ def getRinkInfo():
         data += [rink]
     return data
 
-    
 def getResultsByComplex(complexId: int) -> list:
     resultEnd = False
     data = []
