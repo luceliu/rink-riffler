@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import styled from 'styled-components'
+import {Listings} from './components'
+
+const HeaderBar = styled.div`
+  background: #28B3BC;
+  color: white;
+  font-size: 12px;
+  height: 50px;
+  margin: 0;
+`
+
+const Title = styled.h1`
+position: absolute;
+    left: 20px;
+    top: 10px;
+  margin: 0;
+  display: inline-block;
+`
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HeaderBar>
+        <Title>Rink Riffler</Title>
+      </HeaderBar>
+      <Listings/>
     </div>
   );
 }
