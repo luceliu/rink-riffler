@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const DropDownContainer = styled("div")`
-  width: 300px;
+  width: 260px;
   display: inline-block;
   margin: 0 50px;
   position: absolute;
@@ -11,7 +11,7 @@ const DropDownContainer = styled("div")`
 
 const DropDownHeader = styled("div")`
   margin-bottom: 0.8em;
-  padding: 0.4em 2em 0.4em 1em;
+  padding: 0.4em 1em 0.4em 1em;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   font-weight: 500;
   font-size: 1.3rem;

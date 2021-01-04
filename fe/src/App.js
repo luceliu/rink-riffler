@@ -1,6 +1,6 @@
 import './App.css';
 import styled from 'styled-components'
-import {Listings} from './components'
+import {Listings, RinkMap} from './components'
 
 const HeaderBar = styled.div`
   background: #28B3BC;
@@ -18,13 +18,22 @@ position: absolute;
   display: inline-block;
 `
 
+const FlexContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
 function App() {
   return (
     <div className="App">
       <HeaderBar>
         <Title>Rink Riffler</Title>
       </HeaderBar>
-      <Listings/>
+      <FlexContainer>
+        <Listings/>
+        <RinkMap/>
+      </FlexContainer>
+
     </div>
   );
 }
