@@ -4,9 +4,9 @@ import { GoogleMap, LoadScript } from "@react-google-maps/api";
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const containerStyle = {
-  width: "500px",
-  height: "500px",
-  margin: "2em",
+  width: "600px",
+  height: "300px",
+  margin: "1em 2em",
 };
 
 const center = { lat: 43.74, lng: -79.373 };

@@ -1,6 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
-import { Listings, Map } from "./components";
+import { Listings, Map, Filters } from "./components";
 
 const HeaderBar = styled.div`
   background: #28b3bc;
@@ -18,9 +18,14 @@ const Title = styled.h1`
   display: inline-block;
 `;
 
-const FlexContainer = styled.div`
+const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 function App() {
@@ -29,10 +34,13 @@ function App() {
       <HeaderBar>
         <Title>Rink Riffler</Title>
       </HeaderBar>
-      <FlexContainer>
+      <RowContainer>
         <Listings />
-        <Map />
-      </FlexContainer>
+        <ColumnContainer>
+          <Map />
+          <Filters />
+        </ColumnContainer>
+      </RowContainer>
     </div>
   );
 }
