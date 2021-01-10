@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LocationDropdown from "./LocationDropdown";
+import ListingsTable from "./ListingsTable";
 
 const Container = styled.div`
   width: 40%;
@@ -19,6 +20,7 @@ const Listings = () => {
     <Container>
       <LocationText>Location</LocationText>
       <LocationDropdown />
+      <ListingsTable />
     </Container>
   );
 };
