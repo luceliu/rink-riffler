@@ -1,6 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
-import { Listings, RinkMap } from "./components";
+import { Listings, Map } from "./components";
 
 const HeaderBar = styled.div`
   background: #28b3bc;
@@ -31,7 +31,7 @@ function App() {
       </HeaderBar>
       <FlexContainer>
         <Listings />
-        <RinkMap />
+        <Map />
       </FlexContainer>
     </div>
   );
