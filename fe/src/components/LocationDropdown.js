@@ -15,7 +15,7 @@ const DropDownHeader = styled("div")`
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
   font-weight: 500;
   font-size: 1.3rem;
-  color: #28B3BC;
+  color: #28b3bc;
   background: #ffffff;
 `;
 
@@ -28,7 +28,7 @@ const DropDownList = styled("ul")`
   background: #ffffff;
   border: 2px solid #e5e5e5;
   box-sizing: border-box;
-  color: #28B3BC;
+  color: #28b3bc;
   font-size: 1.3rem;
   font-weight: 500;
   &:first-child {
@@ -42,36 +42,41 @@ const ListItem = styled("li")`
 `;
 
 const LocationDropdown = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
-  
-    const toggling = () => setIsOpen(!isOpen);
-  
-    const onOptionClicked = value => () => {
-      setSelectedOption(value);
-      setIsOpen(false);
-      console.log(selectedOption);
-    };
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
 
-    const options = ["Nathan Phillips Square", "Mel Lastman Square", "High Park", "Christie Pits Park"];
-    return (
-          <DropDownContainer>
-            <DropDownHeader onClick={toggling}>
-              {selectedOption || "Nathan Phillips Square"}
-            </DropDownHeader>
-            {isOpen && (
-              <DropDownListContainer>
-                <DropDownList>
-                  {options.map(option => (
-                    <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
-                      {option}
-                    </ListItem>
-                  ))}
-                </DropDownList>
-              </DropDownListContainer>
-            )}
-          </DropDownContainer>
-      );
-}
+  const toggling = () => setIsOpen(!isOpen);
+
+  const onOptionClicked = (value) => () => {
+    setSelectedOption(value);
+    setIsOpen(false);
+    console.log(selectedOption);
+  };
+
+  const options = [
+    "Nathan Phillips Square",
+    "Mel Lastman Square",
+    "High Park",
+    "Christie Pits Park",
+  ];
+  return (
+    <DropDownContainer>
+      <DropDownHeader onClick={toggling}>
+        {selectedOption || "Nathan Phillips Square"}
+      </DropDownHeader>
+      {isOpen && (
+        <DropDownListContainer>
+          <DropDownList>
+            {options.map((option) => (
+              <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
+                {option}
+              </ListItem>
+            ))}
+          </DropDownList>
+        </DropDownListContainer>
+      )}
+    </DropDownContainer>
+  );
+};
 
 export default LocationDropdown;
