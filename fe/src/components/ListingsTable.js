@@ -49,10 +49,10 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: "Date", numeric: false, disablePadding: true, label: "Date" },
-  { id: "Start", numeric: false, disablePadding: false, label: "Start" },
-  { id: "End", numeric: false, disablePadding: false, label: "End" },
-  { id: "Spots", numeric: true, disablePadding: false, label: "Spots" },
+  { id: "date", numeric: false, disablePadding: true, label: "Date" },
+  { id: "start", numeric: false, disablePadding: false, label: "Start" },
+  { id: "end", numeric: false, disablePadding: false, label: "End" },
+  { id: "spots", numeric: true, disablePadding: false, label: "Spots" },
 ];
 
 function EnhancedTableHead(props) {
@@ -128,11 +128,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable() {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
+  const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
@@ -179,10 +178,6 @@ export default function EnhancedTable() {
     setPage(0);
   };
 
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
@@ -194,7 +189,7 @@ export default function EnhancedTable() {
         <Table
           className={classes.table}
           aria-labelledby="tableTitle"
-          size={dense ? "small" : "medium"}
+          size={"medium"}
           aria-label="enhanced table"
         >
           <EnhancedTableHead
@@ -237,7 +232,7 @@ export default function EnhancedTable() {
                 );
               })}
             {emptyRows > 0 && (
-              <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+              <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}
