@@ -22,18 +22,24 @@ def loadAll():
 
 @app.route('/LoadRinks', methods=['GET'])
 def loadRinks():
-    rinks = efun.getRinkInfo()
-    return json.dumps([rink.__dict__ for rink in rinks])
+    rinks = persist.getRinks()
+    response = jsonify([rink.__dict__ for rink in rinks]);
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
 
 @app.route('/LoadBookings', methods=['GET', 'POST'])
 def loadByFacility():
+    print("GOT REQUEST")
+    response = jsonify()
+    response.headers.add("Access-Control-Allow-Origin", "*")
     if request.method == 'GET':
         if 'id' in request.args:
             complexId = int(request.args['id'])
         else:
             return "Error: No id field provided. Please specify an id.", 400
         bookings = persist.getBookings([complexId], None, None, None, None)
-        return json.dumps([booking.__dict__ for booking in bookings])
+        response.set_data(json.dumps([booking.__dict__ for booking in bookings]))
+        return response
     if request.method == 'POST':
         requestData = request.form
         rinks = json.loads(requestData.get('ids')) #List of IDs for rinks
@@ -44,9 +50,9 @@ def loadByFacility():
 
         if rinks and len(rinks) > 0:
             bookings = persist.getBookings(rinks, days, startTime, endTime, minSpots)
-            return json.dumps([booking.__dict__ for booking in bookings])
+            response.set_data(json.dumps([booking.__dict__ for booking in bookings]))
+            return response
         else:
             return "Error: must specify at least one rink.", 400
-
 if __name__ == '__main__':
     app.run(threaded=True, port=5000)

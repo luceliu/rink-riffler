@@ -41,17 +41,21 @@ const ListItem = styled("li")`
   margin-bottom: 0.8em;
 `;
 
-const LocationDropdown = () => {
+const LocationDropdown = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const { locationList, setSelectedLocation } = props;
 
   const toggling = () => setIsOpen(!isOpen);
 
   const onOptionClicked = (value) => () => {
-    setSelectedOption(value);
+    setSelectedOption(value.name);
     setIsOpen(false);
-    console.log(selectedOption);
+    setSelectedLocation(value.id);
+    console.log(value.name);
   };
+
+  React.useEffect(() => console.log(locationList), [locationList]);
 
   const options = [
     "Nathan Phillips Square",
@@ -67,11 +71,12 @@ const LocationDropdown = () => {
       {isOpen && (
         <DropDownListContainer>
           <DropDownList>
-            {options.map((option) => (
-              <ListItem onClick={onOptionClicked(option)} key={Math.random()}>
-                {option}
-              </ListItem>
-            ))}
+            {locationList &&
+              locationList.map((option) => (
+                <ListItem onClick={onOptionClicked(option)} key={option.id}>
+                  {option.name}
+                </ListItem>
+              ))}
           </DropDownList>
         </DropDownListContainer>
       )}

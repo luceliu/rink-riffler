@@ -15,12 +15,16 @@ const LocationText = styled.h2`
   left: 20px;
 `;
 
-const Listings = () => {
+const Listings = (props) => {
+  const { locationList, setSelectedLocation, bookings } = props;
   return (
     <Container>
       <LocationText>Location</LocationText>
-      <LocationDropdown />
-      <ListingsTable />
+      <LocationDropdown
+        locationList={locationList}
+        setSelectedLocation={setSelectedLocation}
+      />
+      <ListingsTable rows={bookings.data} />
     </Container>
   );
 };

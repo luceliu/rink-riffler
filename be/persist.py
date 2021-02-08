@@ -5,10 +5,22 @@ from datetime import datetime
 Persist Data Returned from efun website between calls to avoid unecessary querying
 Apply Filters as needed
 '''
+rinksCache=[]
 bookingsCache=dict()
 
 
+def getRinks():
+    global rinksCache
+    if len(rinksCache) > 0:
+        print("Returned from cache")
+        return rinksCache
+    else:
+        rinksCache = efun.getRinkInfo()
+        print("Got from website")
+        return rinksCache
+    
 def getBookings(complexIds: list, days: list, start: str, end: str, minSpots: int):
+    global bookingsCache
     allBookings = []
     if complexIds:
         for complexId in complexIds:

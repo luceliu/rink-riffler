@@ -16,12 +16,6 @@ function createData(date, start, end, spots) {
   return { date, start, end, spots };
 }
 
-const rows = [
-  createData("Sun Jan 10", "2:00", "2:45", 2),
-  createData("Sun Jan 10", "3:00", "3:45", 4),
-  createData("Mon Jan 11", "9:00", "9:45", 7),
-];
-
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -125,13 +119,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("date");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const { rows } = props;
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";

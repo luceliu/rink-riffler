@@ -2,8 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 from bs4 import CData
 from bs4.diagnose import diagnose
+from json import JSONEncoder
 from time import sleep
 import re
+import locations
 
 #Constants
 SESSION_URL='https://efun.toronto.ca/TorontoFun/Activities/ActivitiesAdvSearch.asp?SectionId=119&SubSectionId=179'
@@ -28,14 +30,19 @@ session_page = session.get(SESSION_URL)
 ALL_RINKS=[]
 ALL_BOOKINGS=[]
 
+RINK_LOCATIONS=[]
+    
+
 
 class Rink:
     def __init__(self, complexId, name):
         self.id = complexId
         self.name = name
+        self.location = locations.rinks.get(name)
+        print(self.location)
     def __str__(self):
         return self.name + " | " + self.complexId
-
+        
 class RinkBooking:
     def __init__(self, facility, day, date, startTime, endTime, classes, available):
         self.facility = facility
@@ -72,6 +79,7 @@ def getRinkInfo():
     start_page = session.post(START_URL, data=post_data)
     soup = BeautifulSoup(start_page.content, 'html.parser')
     for rinkData in soup.findAll("option")[1:]:
+        print(rinkData)
         rink = Rink(rinkData["value"], rinkData.getText().strip())
         data += [rink]
     return data
@@ -112,10 +120,10 @@ def main():
     global ALL_BOOKINGS
     global ALL_RINKS
     ALL_RINKS = getRinkInfo()
-    ALL_BOOKINGS = getAllBookings()
-    for booking in ALL_BOOKINGS:
-        if booking.available > 5:
-            print(booking)
+    #ALL_BOOKINGS = getAllBookings()
+    #for booking in ALL_BOOKINGS:
+        #if booking.available > 5:
+            #print(booking)
 
 
 if __name__ == "__main__":
